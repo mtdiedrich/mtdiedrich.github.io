@@ -1,8 +1,477 @@
----
-layout: default
----
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MitchSpace.com | Mitchell Diedrich</title>
+<meta name="description" content="Mitchell Diedrich, Machine Learning Engineer. 7+ years in machine learning and data science.">
+<style>
+  /* ~*~ pimp my profile ~*~ */
+  :root {
+    --navy: #003399;
+    --sky: #6699cc;
+    --orange: #ff6600;
+    --orange-pale: #ffcc99;
+    --blue-pale: #b1d0f0;
+    --ink: #000;
+    --link: #003399;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: Verdana, Tahoma, Arial, sans-serif;
+    font-size: 11px;
+    color: var(--ink);
+    background: #000 linear-gradient(to top, #ffcc00, #ff3300 25%, #660000 60%, #000) fixed;
+  }
+  #fire { position: fixed; inset: 0; width: 100%; height: 100%; z-index: -1; display: block; }
+  a { color: var(--link); }
+  a:hover { color: var(--orange); }
+
+  .wrap { max-width: 800px; margin: 0 auto; background: #fff; }
+
+  /* header */
+  .topbar {
+    background: var(--navy);
+    color: #fff;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 6px;
+    padding: 8px 10px;
+  }
+  .logo { font: bold 24px/1 Arial, sans-serif; letter-spacing: -1px; color: #fff; text-decoration: none; }
+  .logo small { font-size: 11px; font-weight: normal; letter-spacing: 0; display: block; color: #cde; }
+  .search { display: flex; gap: 4px; align-items: center; font-size: 10px; }
+  .search input { font-size: 11px; width: 130px; }
+  .search button, .btn {
+    font: 11px Verdana, sans-serif; background: #ddd; border: 2px outset #eee; cursor: pointer; padding: 1px 6px;
+  }
+  .nav { background: var(--sky); padding: 4px 8px; text-align: center; line-height: 1.8; }
+  .nav a { color: #fff; font-weight: bold; text-decoration: none; font-size: 10px; }
+  .nav a:hover { text-decoration: underline; color: #fff; }
+  .nav span { color: #fff; margin: 0 3px; }
+
+  marquee, .marquee {
+    display: block; background: #000; color: #0f0; font: bold 12px "Courier New", monospace; padding: 3px 0;
+  }
+
+  /* layout */
+  .cols { display: flex; gap: 12px; padding: 12px; align-items: flex-start; }
+  .left { width: 300px; flex-shrink: 0; }
+  .right { flex: 1; min-width: 0; }
+
+  h1.name { font-size: 20px; margin: 0 0 6px; }
+  .glitter {
+    background: linear-gradient(90deg, #ff00cc, #ffcc00, #00ccff, #cc00ff, #ff00cc);
+    background-size: 300% 100%;
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+    animation: sparkle 3s linear infinite;
+  }
+  @keyframes sparkle { to { background-position: 300% 0; } }
+  @media (prefers-reduced-motion: reduce) { .glitter { animation: none; } .blink { animation: none !important; } }
+
+  .profile { display: flex; gap: 8px; margin-bottom: 10px; }
+  .profile .pic { width: 140px; height: 170px; flex-shrink: 0; overflow: hidden; position: relative; border: 1px solid #999; }
+  .profile .pic img { position: absolute; width: 340px; left: -80px; top: -4px; }
+  .profile .stats { font-size: 11px; line-height: 1.5; }
+  .online { color: #f60; font-weight: bold; }
+  .online::before { content: "\25CF "; color: #3c3; }
+  .blink { animation: blink 1s steps(2, start) infinite; }
+  @keyframes blink { to { visibility: hidden; } }
+
+  .box { border: 1px solid var(--sky); margin-bottom: 10px; }
+  .box .hd { background: var(--blue-pale); color: var(--navy); font-weight: bold; padding: 3px 6px; font-size: 11px; }
+  .box.orange { border-color: var(--orange); }
+  .box.orange .hd { background: var(--orange-pale); color: #c30; }
+  .box .bd { padding: 6px; }
+  .orange-hd { background: var(--orange); color: #fff; font-weight: bold; padding: 4px 8px; font-size: 12px; }
+
+  .contact { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 6px; }
+  .contact a { display: flex; align-items: center; gap: 5px; text-decoration: none; font-size: 10px; font-weight: bold; }
+  .contact a i {
+    font-style: normal; width: 18px; height: 18px; display: inline-grid; place-items: center;
+    background: var(--sky); color: #fff; border-radius: 2px; font-size: 11px;
+  }
+
+  table.kv { width: 100%; border-collapse: separate; border-spacing: 2px; }
+  table.kv td { padding: 4px; vertical-align: top; font-size: 11px; }
+  table.kv td:first-child { background: var(--blue-pale); color: var(--navy); font-weight: bold; width: 32%; }
+  table.kv td:last-child { background: #d5e8fb; }
+
+  .network { border: 1px solid #000; padding: 10px; font-size: 16px; font-weight: bold; text-align: center; margin-bottom: 10px; }
+
+  .blog li { margin: 3px 0; }
+  .blog .more { font-size: 10px; }
+
+  .section-title { color: #f60; font-weight: bold; font-size: 12px; margin: 10px 0 4px; }
+  .section-title:first-child { margin-top: 0; }
+  .bd p { margin: 0 0 8px; line-height: 1.5; }
+
+  .job { margin-bottom: 12px; }
+  .job-hd { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px; font-weight: bold; }
+  .job-sub { color: #555; font-style: italic; margin: 1px 0 4px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 4px; }
+  .job ul { margin: 0; padding-left: 18px; line-height: 1.5; }
+
+  .friends { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; text-align: center; }
+  .friends a { text-decoration: none; font-weight: bold; font-size: 10px; display: block; }
+  .friends .pic {
+    aspect-ratio: 1; display: grid; place-items: center; margin: 0 auto 3px; width: 100%; max-width: 90px;
+    font: bold 15px Arial, sans-serif; color: #fff; border: 1px solid #999;
+    text-shadow: 1px 1px 0 rgba(0,0,0,.4);
+  }
+
+  .comments { width: 100%; border-collapse: separate; border-spacing: 0 4px; }
+  .comments td { vertical-align: top; padding: 6px; background: #ffe6cc; }
+  .comments td.who { width: 90px; text-align: center; background: #ffcc99; font-weight: bold; font-size: 10px; }
+  .comments .ava { width: 50px; height: 50px; margin: 0 auto 3px; display: grid; place-items: center; color: #fff; font: bold 13px Arial; }
+  .comments .when { font-size: 10px; color: #666; font-weight: bold; margin-bottom: 3px; }
+
+  .player { background: #000; color: #9cf; padding: 6px; font-size: 10px; border: 2px inset #666; }
+  .player .song { color: #fff; font-weight: bold; margin-bottom: 4px; }
+  .player .ctrl { display: flex; gap: 4px; align-items: center; }
+  .player button { font: bold 10px Verdana; background: #333; color: #9cf; border: 1px outset #666; cursor: pointer; padding: 2px 6px; }
+  .player .bar { flex: 1; height: 6px; background: #222; border: 1px solid #444; }
+  .player .bar div { height: 100%; width: 0; background: #3c3; transition: width .2s linear; }
+
+  .counter { text-align: center; padding: 8px 14px; color: #fff; font-size: 10px; background: #000; width: max-content; margin: 12px auto 24px; border: 1px solid #f60; }
+  .counter .digits { display: inline-flex; gap: 2px; margin-top: 4px; }
+  .counter .digits span { background: #000; color: #0f0; font: bold 16px "Courier New", monospace; padding: 2px 4px; border: 1px solid #0f0; }
+
+  .footer { background: var(--sky); color: #fff; text-align: center; padding: 8px; font-size: 10px; }
+  .footer a { color: #fff; }
+
+  @media (max-width: 640px) {
+    .cols { flex-direction: column; padding: 10px; }
+    .left { width: 100%; }
+    .search { display: none; }
+    .friends { grid-template-columns: repeat(4, 1fr); gap: 5px; }
+  }
+  @media print {
+    body { background: #fff; }
+    .topbar .search, .nav, marquee, .player, .counter, .comments-box { display: none; }
+  }
+</style>
+</head>
 <body>
-<img src="images/Dwolla_2020-21.jpg" align="left" alt="hi" class="inline"/>
-<h1>Welcome.</h1>
-<p>I don't know how you got here, but enjoy your stay. Feel free to click anywhere this page, but don't expect anything to happen.</p>
+<canvas id="fire" aria-hidden="true"></canvas>
+<div class="wrap">
+
+  <div class="topbar">
+    <a class="logo" href="#">MitchSpace.com<small>a place for models</small></a>
+    <form class="search" onsubmit="event.preventDefault(); location.hash='skills';">
+      <span>Search:</span>
+      <input type="text" placeholder="the Web" aria-label="Search">
+      <button type="submit">Search</button>
+    </form>
+  </div>
+  <div class="nav">
+    <a href="#">Home</a><span>|</span>
+    <a href="#experience">Experience</a><span>|</span>
+    <a href="#projects">Projects</a><span>|</span>
+    <a href="#skills">Skills</a><span>|</span>
+    <a href="#education">Education</a><span>|</span>
+    <a href="#friends">Top 8</a><span>|</span>
+    <a href="https://github.com/mtdiedrich">GitHub</a><span>|</span>
+    <a href="https://linkedin.com/in/mitchell-diedrich">LinkedIn</a><span>|</span>
+    <a href="mailto:mitchell@mitchelldiedrich.com">Mail</a>
+  </div>
+  <marquee scrollamount="4">~*~ WeLcOmE 2 mY pAgE!!! ~*~ thx 4 the add ~*~ now accepting friend requests from recruiters &amp; hiring managers ~*~ PC4PC (pull request for pull request) ~*~</marquee>
+
+  <div class="cols">
+
+    <!-- ========== LEFT COLUMN ========== -->
+    <div class="left">
+      <h1 class="name"><span class="glitter">~Mitchell Diedrich~</span></h1>
+
+      <div class="profile">
+        <div class="pic"><img src="images/Dwolla_2020-21.jpg" alt="Mitchell Diedrich"></div>
+        <div class="stats">
+          "turning data into<br>predictions since<br>before it was cool"<br><br>
+          Machine Learning<br>Engineer<br>
+          Iowa<br>
+          United States<br><br>
+          <span class="online blink">Online Now!</span><br><br>
+          <b>Mood:</b> optimizing 🤓<br>
+          <b>View My:</b> <a href="https://github.com/mtdiedrich">Code</a> | <a href="#projects">Projects</a>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="hd">Contacting Mitchell</div>
+        <div class="contact">
+          <a href="mailto:mitchell@mitchelldiedrich.com"><i>✉</i>Send Message</a>
+          <a href="https://linkedin.com/in/mitchell-diedrich"><i>+</i>Add to Friends</a>
+          <a href="https://github.com/mtdiedrich"><i>★</i>Add to Favorites</a>
+          <a href="https://github.com/mtdiedrich?tab=repositories"><i>⎇</i>Fork My Repos</a>
+          <a href="#projects"><i>▶</i>View Projects</a>
+          <a href="#experience"><i>☰</i>Work History</a>
+        </div>
+      </div>
+
+      <div class="box">
+        <div class="hd">MitchSpace URL:</div>
+        <div class="bd"><a href="https://mitchelldiedrich.com">http://www.mitchelldiedrich.com</a></div>
+      </div>
+
+      <div class="box">
+        <div class="hd">Mitchell's Profile Song</div>
+        <div class="player">
+          <div class="song">♫ "Gradient Descent (Local Minimum Mix)"<br>The Backprops</div>
+          <div class="ctrl">
+            <button id="play" type="button">▶ PLAY</button>
+            <button id="stop" type="button">■</button>
+            <div class="bar"><div id="prog"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="box" id="skills">
+        <div class="hd">Mitchell's Interests</div>
+        <table class="kv">
+          <tr><td>Languages</td><td>Python, TypeScript, PowerShell, Bash, SQL</td></tr>
+          <tr><td>Machine Learning / Data Science</td><td>PyTorch, TensorFlow/Keras, scikit-learn, BERT/transformers, NLP</td></tr>
+          <tr><td>AI / LLM</td><td>RAG, prompt engineering, model evaluation, model guardrails</td></tr>
+          <tr><td>Data</td><td>Pandas, Polars, NumPy, DuckDB</td></tr>
+          <tr><td>Infra</td><td>AWS (Bedrock, SageMaker, Lambda, CloudFormation, CDK, S3, IAM), CI/CD pipelines</td></tr>
+        </table>
+      </div>
+
+      <div class="box">
+        <div class="hd">Mitchell's Details</div>
+        <table class="kv">
+          <tr><td>Status:</td><td>Building things</td></tr>
+          <tr><td>Here for:</td><td>Networking, Interesting problems</td></tr>
+          <tr><td>Hometown:</td><td>Iowa</td></tr>
+          <tr><td>Occupation:</td><td>Machine Learning Engineer</td></tr>
+          <tr><td>Experience:</td><td>7+ years in ML &amp; data science</td></tr>
+          <tr><td>Zodiac Sign:</td><td>Gradient Boost ♉</td></tr>
+        </table>
+      </div>
+
+      <div class="box" id="education">
+        <div class="hd">Mitchell's Schools</div>
+        <table class="kv">
+          <tr><td>University of Iowa</td><td>Iowa City, IA<br>2017 – 2019<br>Mathematics coursework, Computer Vision Lab</td></tr>
+          <tr><td>Kirkwood Community College</td><td>Cedar Rapids, IA<br>2014 – 2016<br>Associate of Science</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- ========== RIGHT COLUMN ========== -->
+    <div class="right">
+      <div class="network">Mitchell is in your extended network</div>
+
+      <div class="box orange blog" id="projects">
+        <div class="hd">Mitchell's Latest Blog Entries [<a href="https://github.com/mtdiedrich">Subscribe to this Blog</a>]</div>
+        <div class="bd">
+          <ul>
+            <li>NFL player decline prediction (<a href="https://github.com/mtdiedrich/ML4FF">view more</a>)</li>
+            <li>YouTube performance modeling (<a href="https://github.com/mtdiedrich/yt-performance">view more</a>)</li>
+            <li>Text style transfer (<a href="https://github.com/mtdiedrich/text-style-transfer">view more</a>)</li>
+            <li>Golf swing analysis (<a href="https://github.com/mtdiedrich/no-layups">view more</a>)</li>
+          </ul>
+          <div class="more">[<a href="https://github.com/mtdiedrich?tab=repositories">View All Blog Entries</a>]</div>
+        </div>
+      </div>
+
+      <div class="box orange">
+        <div class="hd">Mitchell's Blurbs</div>
+        <div class="bd">
+          <div class="section-title">About me:</div>
+          <p>hey!! I'm Mitchell, a <b>Machine Learning Engineer</b> with <b>7+ years in machine learning and data science</b>. Right now I build LLM tooling and ML platforms at Principal Financial Group: libraries on AWS Bedrock, a central LLMOps platform used by ~15 teams, and a SageMaker platform that ~50 projects have shipped through.</p>
+          <p>Before that I was a data engineer at Dwolla, and before <i>that</i> I trained computer vision models in the University of Iowa Computer Vision Lab. In my spare time I build ML side projects about football, YouTube, LLM internals, and my golf swing (which needs it).</p>
+          <div class="section-title">Who I'd like to meet:</div>
+          <p>Teams working on hard ML and LLM problems. People who like evals more than vibes. Anyone who will pair on a gnarly production bug. Recruiters: my <a href="mailto:mitchell@mitchelldiedrich.com">inbox</a> is open. 💌</p>
+        </div>
+      </div>
+
+      <div class="box orange" id="experience">
+        <div class="hd">Mitchell's Work History</div>
+        <div class="bd">
+          <div class="job">
+            <div class="job-hd"><span>Principal Financial Group</span><span>January 2021 – Present</span></div>
+            <div class="job-sub"><span>Machine Learning Engineer</span><span>Remote</span></div>
+            <ul>
+              <li>Designed and built TypeScript and Python libraries extending AWS Bedrock with model comparison/evaluation, cost estimation, LLM-as-judge, and guardrail controls. Shipped with runnable example apps. Selected by engineering leadership as preferred implementation for LLM interaction and as library design reference.</li>
+              <li>Maintained the centralized LLMOps platform managing AI interaction for ~15 teams, enforcing enterprise standards and extending Bedrock's functionality with evals, observability, and cost alerting. One of two engineers responsible for diagnosing and resolving production issues.</li>
+              <li>Cut model deployment iteration time for ~30 data scientists from 15 minutes to under 1 minute by replacing a CI round-trip with a local notebook harness.</li>
+              <li>Diagnosed postprocessing bug in production insurance-lapse model; F1 score recovered from 0.58 to 0.70. Delivered root-cause writeup; drove data science team's adoption of peer code review.</li>
+              <li>Built a multi-account SageMaker platform with 3 engineers, with CI/CD pipelines and a self-service project template for one-click ML scaffolding; paired with data scientists to fit the template to their models. ~50 projects deployed via platform.</li>
+              <li>Productionized ML models across the US insurance segment, including a lead-scoring model to help sales reps allocate effort and a BERT email classifier routing inbound mail to eliminate manual triage.</li>
+            </ul>
+          </div>
+          <div class="job">
+            <div class="job-hd"><span>Dwolla</span><span>January 2020 – October 2020</span></div>
+            <div class="job-sub"><span>Data Engineer</span><span>Des Moines, IA</span></div>
+            <ul>
+              <li>Built a process to provide developers with obfuscated database copies, allowing work with production data while maintaining regulatory compliance.</li>
+              <li>Automated tax document processing via Amazon Textract, saving ~100 hours each week of tax season.</li>
+              <li>Designed a MySQL log parser that traced data lineage through nested joins and views, letting engineers find where a field originated.</li>
+            </ul>
+          </div>
+          <div class="job">
+            <div class="job-hd"><span>University of Iowa</span><span>May 2018 – July 2019</span></div>
+            <div class="job-sub"><span>Computer Vision Lab Assistant</span><span>Iowa City, IA</span></div>
+            <ul>
+              <li>Developed Keras computer vision models to classify documents, replacing manual classification.</li>
+              <li>Developed TensorFlow computer vision models to classify patient imaging based on disorder presence.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="box orange">
+        <div class="hd">Select Projects</div>
+        <div class="bd">
+          <div class="job">
+            <div class="job-hd"><span><a href="https://github.com/mtdiedrich/ML4FF">NFL player decline prediction</a></span></div>
+            <div class="job-sub"><span>Python, scikit-learn, pandas, NumPy</span></div>
+            <p>Gradient-boosted classifier with walk-forward time-series validation over 20 seasons of player data: AUC 0.878 across 3,389 out-of-sample predictions (2010–2024); High Risk tier calibrated at 87.9% actual decline vs. 11.9% for Low Risk. Feature engineering across player stats, age curves, injuries, workload-vs-peak, and team changes.</p>
+          </div>
+          <div class="job">
+            <div class="job-hd"><span><a href="https://github.com/mtdiedrich/yt-performance">YouTube performance modeling</a></span></div>
+            <div class="job-sub"><span>Python, CatBoost, sentence-transformers, PyTorch, AutoGluon, SQLAlchemy, DuckDB</span></div>
+            <p>Predicted channel-relative video performance on a 1.15M-video corpus (92k/11.5k/11.5k train/val/test); fine-tuning the MiniLM title embedding model lifted test R² from 0.06 to 0.22. Benchmarked multimodal (title text + ResNet50 thumbnail features) and transcript topic-cluster variants; documented negative results.</p>
+          </div>
+          <div class="job">
+            <div class="job-hd"><span><a href="https://github.com/mtdiedrich/text-style-transfer">Text style transfer</a></span></div>
+            <div class="job-sub"><span>Python, PyTorch, Hugging Face Transformers</span></div>
+            <p>Library for activation-steering style transfer on open-weight LLMs: style vectors extracted from contrastive pairs in the residual stream, injected at inference via forward hooks; bridge-style composition for style pairs with no parallel data. pip-installable with CLI.</p>
+          </div>
+          <div class="job">
+            <div class="job-hd"><span><a href="https://github.com/mtdiedrich/no-layups">Golf swing analysis</a></span></div>
+            <div class="job-sub"><span>Python, MediaPipe, FastAPI, ffmpeg, JavaScript</span></div>
+            <p>Computer-vision web app reconstructing a 3D skeleton from single-camera golf-swing footage: pose estimation, key-event detection (address/top/impact), and 8 biomechanical metrics benchmarked against a reference swing, served with an interactive 3D viewer.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="box orange" id="friends">
+        <div class="hd">Mitchell's Friend Space</div>
+        <div class="bd">
+          <p><b>Mitchell has <span style="color:#c30">8</span> friends.</b></p>
+          <div class="friends">
+            <a href="https://www.python.org"><div class="pic" style="background:#3776ab">Py</div>Python</a>
+            <a href="https://pytorch.org"><div class="pic" style="background:#ee4c2c">🔥</div>PyTorch</a>
+            <a href="https://aws.amazon.com/bedrock/"><div class="pic" style="background:#232f3e">Bedrock</div>Bedrock</a>
+            <a href="https://aws.amazon.com/sagemaker/"><div class="pic" style="background:#1a7f64">SM</div>SageMaker</a>
+            <a href="https://www.typescriptlang.org"><div class="pic" style="background:#3178c6">TS</div>TypeScript</a>
+            <a href="https://huggingface.co"><div class="pic" style="background:#ffb000">🤗</div>Hugging Face</a>
+            <a href="https://duckdb.org"><div class="pic" style="background:#222">🦆</div>DuckDB</a>
+            <a href="https://scikit-learn.org"><div class="pic" style="background:#f89939">sk</div>scikit-learn</a>
+          </div>
+          <p style="text-align:right;margin:8px 0 0"><a href="#skills">View All of Mitchell's Friends</a></p>
+        </div>
+      </div>
+
+      <div class="box orange comments-box">
+        <div class="hd">Mitchell's Friends Comments</div>
+        <div class="bd">
+          <table class="comments">
+            <tr>
+              <td class="who"><div class="ava" style="background:#ee4c2c">🔥</div>PyTorch</td>
+              <td><div class="when">Oct 12, 2006 4:20 PM</div>thx 4 the add!!! ur gradients r always so well-behaved 😊 <b>loss.backward()</b> anytime</td>
+            </tr>
+            <tr>
+              <td class="who"><div class="ava" style="background:#f89939">sk</div>scikit-learn</td>
+              <td><div class="when">Oct 10, 2006 9:13 PM</div>AUC 0.878??? walk-forward validated?? ur so out-of-sample 😍 PC4PC</td>
+            </tr>
+            <tr>
+              <td class="who"><div class="ava" style="background:#3776ab">Py</div>Python</td>
+              <td><div class="when">Oct 8, 2006 11:52 AM</div>~*~ import mitchell ~*~<br>no dependency conflicts. 10/10 would pip install again</td>
+            </tr>
+          </table>
+          <p style="text-align:right;margin:4px 0 0"><a href="mailto:mitchell@mitchelldiedrich.com">Add Comment</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <a href="#">About</a> | <a href="mailto:mitchell@mitchelldiedrich.com">Contact</a> | <a href="https://github.com/mtdiedrich">GitHub</a> | <a href="https://linkedin.com/in/mitchell-diedrich">LinkedIn</a> | <a href="#">Top</a><br>
+    © 2003-2006 MitchSpace.com. All Rights Reserved. Best viewed in Internet Explorer 6 at 800×600.
+  </div>
+</div>
+
+<div class="counter">
+  You are visitor number<br>
+  <div class="digits" id="digits"></div>
+</div>
+
+<script>
+  // ~*~ FLAMES ~*~ (the classic Doom fire effect, stretched across the background)
+  (function () {
+    var W = 100, H = 56;
+    var canvas = document.getElementById('fire'), g = canvas.getContext('2d');
+    canvas.width = W; canvas.height = H;
+    var pal = [[7,7,7],[31,7,7],[47,15,7],[71,15,7],[87,23,7],[103,31,7],[119,31,7],[143,39,7],[159,47,7],
+      [175,63,7],[191,71,7],[199,71,7],[223,79,7],[223,87,7],[223,87,7],[215,95,7],[215,103,15],[207,111,15],
+      [207,119,15],[207,127,15],[207,135,23],[199,135,23],[199,143,23],[199,151,31],[191,159,31],[191,159,31],
+      [191,167,39],[191,167,39],[191,175,47],[183,175,47],[183,183,47],[183,183,55],[207,207,111],[223,223,159],
+      [239,239,199],[255,255,255]];
+    var top = pal.length - 1, px = new Uint8Array(W * H), img = g.createImageData(W, H);
+    for (var x = 0; x < W; x++) px[(H - 1) * W + x] = top;
+    function step() {
+      for (var x = 0; x < W; x++) for (var y = 1; y < H; y++) {
+        var src = y * W + x, p = px[src];
+        if (!p) { px[src - W] = 0; continue; }
+        var r = (Math.random() * 4) | 0, dst = src - r + 1;
+        px[Math.max(0, dst - W)] = Math.max(0, p - (Math.random() < 0.55 ? 1 : 0));
+      }
+    }
+    function draw() {
+      for (var i = 0; i < px.length; i++) {
+        var c = pal[px[i]], o = i * 4;
+        img.data[o] = c[0]; img.data[o + 1] = c[1]; img.data[o + 2] = c[2]; img.data[o + 3] = 255;
+      }
+      g.putImageData(img, 0, 0);
+    }
+    var still = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (still) { for (var i = 0; i < H * 2; i++) step(); draw(); return; }
+    var last = 0;
+    (function loop(t) {
+      if (t - last > 40) { step(); draw(); last = t; }
+      requestAnimationFrame(loop);
+    })(0);
+  })();
+  // fake hit counter
+  (function () {
+    var n = 1337;
+    try { n = (parseInt(localStorage.getItem('hits') || '1336', 10) || 1336) + 1; localStorage.setItem('hits', n); } catch (e) {}
+    var s = String(n).padStart(6, '0'), d = document.getElementById('digits');
+    for (var i = 0; i < s.length; i++) { var el = document.createElement('span'); el.textContent = s[i]; d.appendChild(el); }
+  })();
+
+  // profile song: a tiny chiptune via WebAudio (click to play, no autoplay — we've grown since 2006)
+  (function () {
+    var ctx = null, timers = [], playing = false;
+    var notes = [659, 587, 523, 587, 659, 659, 659, 0, 587, 587, 587, 0, 659, 784, 784, 0,
+                 659, 587, 523, 587, 659, 659, 659, 659, 587, 587, 659, 587, 523, 0, 0, 0];
+    var step = 0.18, prog = document.getElementById('prog');
+    function stop() {
+      timers.forEach(clearTimeout); timers = []; playing = false; prog.style.width = '0';
+      if (ctx) { ctx.close(); ctx = null; }
+    }
+    document.getElementById('play').onclick = function () {
+      if (playing) return;
+      playing = true;
+      ctx = new (window.AudioContext || window.webkitAudioContext)();
+      var t0 = ctx.currentTime + 0.05;
+      notes.forEach(function (f, i) {
+        if (!f) return;
+        var o = ctx.createOscillator(), g = ctx.createGain();
+        o.type = 'square'; o.frequency.value = f;
+        g.gain.setValueAtTime(0.06, t0 + i * step);
+        g.gain.exponentialRampToValueAtTime(0.001, t0 + (i + 0.9) * step);
+        o.connect(g).connect(ctx.destination);
+        o.start(t0 + i * step); o.stop(t0 + (i + 1) * step);
+      });
+      notes.forEach(function (_, i) {
+        timers.push(setTimeout(function () { prog.style.width = ((i + 1) / notes.length * 100) + '%'; }, i * step * 1000));
+      });
+      timers.push(setTimeout(stop, notes.length * step * 1000 + 200));
+    };
+    document.getElementById('stop').onclick = stop;
+  })();
+</script>
 </body>
+</html>
