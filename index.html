@@ -69,9 +69,12 @@
   @keyframes sparkle { to { background-position: 300% 0; } }
   @media (prefers-reduced-motion: reduce) { .glitter { animation: none; } .blink { animation: none !important; } }
 
-  .profile { display: flex; gap: 8px; margin-bottom: 10px; }
-  .profile .pic { width: 140px; height: 170px; flex-shrink: 0; overflow: hidden; position: relative; border: 1px solid #999; }
+  .profile { margin-bottom: 10px; }
+  .profile .pics { display: flex; gap: 8px; margin-bottom: 8px; }
+  .profile figure { margin: 0; text-align: center; font-size: 10px; font-weight: bold; color: #666; }
+  .profile .pic { width: 140px; height: 170px; flex-shrink: 0; overflow: hidden; position: relative; border: 1px solid #999; margin-bottom: 2px; }
   .profile .pic img { position: absolute; width: 340px; left: -80px; top: -4px; }
+  .profile .pic.then img { width: 100%; height: 100%; left: 0; top: 0; object-fit: cover; object-position: 50% 40%; }
   .profile .stats { font-size: 11px; line-height: 1.5; }
   .online { color: #f60; font-weight: bold; }
   .online::before { content: "\25CF "; color: #3c3; }
@@ -118,6 +121,7 @@
     font: bold 15px Arial, sans-serif; color: #fff; border: 1px solid #999;
     text-shadow: 1px 1px 0 rgba(0,0,0,.4);
   }
+  .friends .pic img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
   .comments { width: 100%; border-collapse: separate; border-spacing: 0 4px; }
   .comments td { vertical-align: top; padding: 6px; background: #ffe6cc; }
@@ -183,12 +187,14 @@
       <h1 class="name"><span class="glitter">~Mitchell Diedrich~</span></h1>
 
       <div class="profile">
-        <div class="pic"><img src="images/Dwolla_2020-21.jpg" alt="Mitchell Diedrich"></div>
+        <div class="pics">
+          <figure><div class="pic"><img src="images/Dwolla_2020-21.jpg" alt="Mitchell Diedrich"></div>now</figure>
+          <figure><div class="pic then"><img src="images/mitchell-2006.webp" alt="Mitchell Diedrich, emo era"></div>then</figure>
+        </div>
         <div class="stats">
-          "turning data into<br>predictions since<br>before it was cool"<br><br>
-          Machine Learning<br>Engineer<br>
-          Iowa<br>
-          United States<br><br>
+          "turning data into predictions since before it was cool"<br><br>
+          Machine Learning Engineer<br>
+          Iowa, United States<br>
           <span class="online blink">Online Now!</span><br><br>
           <b>Mood:</b> optimizing 🤓<br>
           <b>View My:</b> <a href="https://github.com/mtdiedrich">Code</a> | <a href="#projects">Projects</a>
@@ -346,15 +352,15 @@
       </div>
 
       <div class="box orange" id="friends">
-        <div class="hd">Mitchell's Friend Space</div>
+        <div class="hd">Mitchell's Top 8</div>
         <div class="bd">
           <p><b>Mitchell has <span style="color:#c30">8</span> friends.</b></p>
           <div class="friends">
+            <a href="#friends"><div class="pic"><img src="images/tom.jpg" alt="Tom"></div>Tom</a>
             <a href="https://www.python.org"><div class="pic" style="background:#3776ab">Py</div>Python</a>
             <a href="https://pytorch.org"><div class="pic" style="background:#ee4c2c">🔥</div>PyTorch</a>
             <a href="https://aws.amazon.com/bedrock/"><div class="pic" style="background:#232f3e">Bedrock</div>Bedrock</a>
             <a href="https://aws.amazon.com/sagemaker/"><div class="pic" style="background:#1a7f64">SM</div>SageMaker</a>
-            <a href="https://www.typescriptlang.org"><div class="pic" style="background:#3178c6">TS</div>TypeScript</a>
             <a href="https://huggingface.co"><div class="pic" style="background:#ffb000">🤗</div>Hugging Face</a>
             <a href="https://duckdb.org"><div class="pic" style="background:#222">🦆</div>DuckDB</a>
             <a href="https://scikit-learn.org"><div class="pic" style="background:#f89939">sk</div>scikit-learn</a>
